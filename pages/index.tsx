@@ -4,7 +4,7 @@ import { CustomHead } from '@/components/CustomHead';
 export default function HomePage() {
   return (
     <>
-        <CustomHead title="BolierPlate Home" />
+        <CustomHead title="Brawl Tracker Home" />
         <Home />
     </>
   )

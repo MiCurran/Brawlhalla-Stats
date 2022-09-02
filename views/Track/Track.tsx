@@ -60,7 +60,9 @@ export default function Track(props: TrackProps) {
     const [playerCurrent, setPlayerCurrent] = useState(player)
     const [showGlobal, setShowGlobal] = useState(false);
     const [showRegion, setShowRegion] = useState(false);
+    const [showName, setShowName] = useState(true);
     const [color, setColor] = useState(config.baseColor);
+    const [loading, setLoading] = useState(false);
     let cols = 3
     if (showGlobal){cols += 1}
     if (showRegion){cols += 1}
@@ -71,12 +73,14 @@ export default function Track(props: TrackProps) {
       };
 
      const updateUser = async () => {
+        setLoading(true);
         const updated = await getUserRanked(player.brawlhallaId);
         let temp = playerCurrent;
         temp.wins = updated.wins - player.wins;
         temp.losses = (updated.games - updated.wins) - player.losses
         setPlayerCurrent(temp);
         console.log(updated);
+        setLoading(false);
     };
 
     useEffect(() =>{
@@ -86,8 +90,12 @@ export default function Track(props: TrackProps) {
     
   return (
     <Center flexDirection={'column'} py={10}>
-        <SimpleGrid columns={cols} gap={0}>
-        <NameCol data={playerCurrent.name} color={color}/>
+        {loading
+            ? <p>loading...</p>
+            :(
+                <>
+                <SimpleGrid columns={cols} gap={0}>
+        {showName && <NameCol data={playerCurrent.name} color={color}/>}
         <Box/>
         <Box/>
         </SimpleGrid>
@@ -132,12 +140,22 @@ export default function Track(props: TrackProps) {
         >
             Show Region Rank
         </Checkbox>
+        <Checkbox 
+            isChecked={showName} 
+            onChange={() => setShowName(!showName)}
+        >
+            Show Name
+        </Checkbox>
         <Text>Color Scheme</Text>
         <TwitterPicker 
         color={ color }
         onChangeComplete={handleChangeColor}
         />
       </Stack>
+                </>
+            )
+        }
+        
     </Center>
   )
 }

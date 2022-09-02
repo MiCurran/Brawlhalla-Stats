@@ -17,7 +17,7 @@ export default function Home() {
           variants={animationVariants}
           className={styles.title} 
           color="brand.900">
-          <a href="https://nextjs.org">Brawlhalla Elo Tracker</a>
+          <a href="https://nextjs.org">Brawlhalla Stats &amp; Elo Tracker</a>
         </MotionHeading>
 
         <Text className={styles.description}>
@@ -29,9 +29,16 @@ export default function Home() {
             initial={'hidden'}
             animate={'visibleExtraDelay'}
             variants={animationVariants}
+            href="/stats" 
+        >
+            <h2>Lookup Stats &rarr;</h2>
+          </MotionLink>
+        <MotionLink
+            initial={'hidden'}
+            animate={'visibleExtraDelay'}
+            variants={animationVariants}
             href="/track" >
-            <h2>Start Tracking &rarr;</h2>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
+            <h2>Stat Tracking &rarr;</h2>
           </MotionLink>
 
           <MotionLink
@@ -40,7 +47,6 @@ export default function Home() {
             variants={animationVariants}
             href="https://nextjs.org/docs" >
             <h2>Documentation &rarr;</h2>
-            <p>Find in-depth information about Next.js features and API.</p>
           </MotionLink>
           <MotionLink
             initial={'hidden'}
@@ -52,18 +58,6 @@ export default function Home() {
           </MotionLink>
         </VStack>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16} />
-          </span>
-        </a>
-      </footer>
     </div>
   )
 }
